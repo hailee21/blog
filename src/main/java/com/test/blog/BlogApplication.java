@@ -1,13 +1,13 @@
-package java.com.saveme;
+package com.test.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class SavemeApplication {
+public class BlogApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SavemeApplication.class, args);
+		SpringApplication.run(BlogApplication.class, args);
 	}
 
 }
