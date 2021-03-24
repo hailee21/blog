@@ -1,13 +1,13 @@
 $(document).ready( function() {
 
-        // 섹션 분리
-        $("#header").load("./web/header.html");
-        $("#main").load("./web/main.html");
-        $("#footer").load("./web/footer.html");
+    // 섹션 분리
+    $("#header").load("./web/header.html");
+    $("#main").load("./web/main.html");
+    $("#footer").load("./web/footer.html");
 
-        // 모달창 회전
-	    carousel();
-    });
+    // 모달창 회전
+    carousel();
+});
 
 function carousel(){
     $('.owl-carousel').owlCarousel({

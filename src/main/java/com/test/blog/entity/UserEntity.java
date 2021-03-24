@@ -1,22 +1,9 @@
 package com.test.blog.entity;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 
 @Entity
-@DynamicInsert
-@DynamicUpdate
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "Users")
+@Table(name = "users")
 public class UserEntity extends BaseTimeEntity {
 
     @Id
@@ -24,18 +11,18 @@ public class UserEntity extends BaseTimeEntity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="userTypeId")
-    private UserTypeEntity userType;
+    @JoinColumn(name="usertype_id", nullable = false)
+    private UsertypeEntity usertypeId;
 
-    @Column(name="name", length=45)
+    @Column(name="name", length=45, nullable = false)
     private String name;
 
-    @Column(name="phoneNumber", length=11)
+    @Column(name="phone_number", length=11, nullable = false)
     private String phoneNumber;
 
-    @Column(name="email", length=45)
+    @Column(name="email", length=45, nullable = false)
     private String email;
 
-    @Column(name="profilePicture")
+    @Column(name="profile_picture", nullable = false, columnDefinition = "integer default 0")
     private Integer profilePicture;
 }

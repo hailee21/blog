@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="./js/board/board.js"></script>
+</head>
+<body>
+    <div>
+        <form id="board_box" >
+            <p name="views" th:text="'조회 수: ' + ${views}" />
+            <p name="category" th:text="'카테고리: ' + ${category}" />
+            <p name="createdAt" th:text="'작성일자: ' + ${createdAt}" />
+            <p name="userName" th:text="${userName}" readonly>
+            <input type="text" name="boardTitle">
+            <input type="text" name="boadContent">
+        </form>
+        <button id="addBtn">입력</button>
+        <button id="updateBtn">수정</button>
+        <button id="delBtn">삭제</button>
+    </div>
+</body>
+</html>

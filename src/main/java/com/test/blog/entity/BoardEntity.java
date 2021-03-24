@@ -1,17 +1,9 @@
 package com.test.blog.entity;
 
-import lombok.*;
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
-
 import javax.persistence.*;
 
 @Entity
-@DynamicInsert
-@DynamicUpdate
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "Boards")
+@Table(name = "boards")
 public class BoardEntity extends BaseTimeEntity {
 
     @Id
@@ -19,19 +11,19 @@ public class BoardEntity extends BaseTimeEntity {
     private Integer id;
 
     @ManyToOne
-    @JoinColumn(name="userId")
-    private UserEntity user;
+    @JoinColumn(name="user_id", nullable = false)
+    private UserEntity userId;
 
     @ManyToOne
-    @JoinColumn(name="categoryId")
-    private CategoryEntity category;
+    @JoinColumn(name="category_id", nullable = false)
+    private CategoryEntity categoryId;
 
-    @Column(name="title", length=100)
+    @Column(name="title", length=100, nullable = false)
     private String title;
 
-    @Column(name="content")
+    @Column(name="content", nullable = false)
     private String content;
 
-    @Column(name="views")
+    @Column(name="views", nullable = false, columnDefinition = "integer default 0")
     private Integer views;
 }
