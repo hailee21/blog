@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Board</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="./js/board/board.js"></script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>no.</th>
+                <th>제목</th>
+                <th>작성자</th>
+            </tr>
+            <tr th:each="board: ${boardList}">
+                <td th:text="${board.boardId}"></td>
+                <td th:text="${board.title}"></td>
+                <td th:text="${board.userName}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
