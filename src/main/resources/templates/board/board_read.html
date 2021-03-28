@@ -5,22 +5,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script>
-        $(document).ready(function() {
-            $("#delBtn").click(function() {
-                $.ajax({
-                    url:"deleteBoard",
-                    method:"POST",
-                    data:{id:$("#boardId").val()},
-                    success:function(data){
-                        window.location.href = '/board';
-                    }
-                })
-            });
-        })
-
-
-    </script>
 </head>
 <body>
     <div>
@@ -34,5 +18,24 @@
         <button id="updateBtn">수정</button>
         <button id="delBtn">삭제</button>
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#delBtn").click(function() {
+                const href = "deleteBoard/" + $("#boardId").val();
+                console.log(href);
+
+                $.ajax({
+                    url: href,
+                    method: 'DELETE',
+                    success: function(data) {
+                        window.location.href = '/board';
+                    }
+                })
+            });
+        })
+
+
+    </script>
 </body>
 </html>

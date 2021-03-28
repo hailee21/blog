@@ -5,10 +5,7 @@ import com.test.board.service.BoardService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -29,16 +26,16 @@ public class BoardController {
         return "board/board_main";
     }
 
-    @GetMapping("/getBoard")
-    public String getBoard(@RequestParam(name="id", required=true) Integer boardId, Model model) {
+    @GetMapping("/getBoard/{boardId}")
+    public String getBoard(@PathVariable("boardId") Integer boardId, Model model) {
         BoardEntity board = boardService.getBoard(boardId);
         model.addAttribute("board", board);
 
         return "board/board_read";
     }
 
-    @PostMapping("/deleteBoard")
-    public String deleteBoard(@RequestParam(name="id", required=true) Integer boardId, Model model) {
+    @DeleteMapping("/deleteBoard/{boardId}")
+    public String deleteBoard(@PathVariable("boardId") Integer boardId, Model model) {
         boardService.deleteBoard(boardId);
 
         return "redirect:/board";

@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping("/job")
+@RequestMapping("/board/job")
 public class BoardRestController {
 
     private final BoardService boardService;
@@ -20,10 +20,5 @@ public class BoardRestController {
     public BoardRestController(BoardService boardService) {
         this.boardService = boardService;
     }
-    @GetMapping("/getBoard")
-    public String getBoard(@RequestParam(name="id", required=true) Integer boardId, Model model) {
-        BoardEntity board = boardService.getBoard(boardId);
-        model.addAttribute("board", board);
-        return "board/board_read";
-    }
+
 }

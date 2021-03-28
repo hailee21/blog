@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>comments</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>no.</th>
+                <th>내용</th>
+            </tr>
+            <tr th:each="comment: ${commentList}">
+                <td th:text="${comment.id}"></td>
+                <td th:text="${comment.content}"></td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

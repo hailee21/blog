@@ -15,7 +15,7 @@
                 <th>내용</th>
             </tr>
             <tr th:each="board: ${boardList}">
-                <td><a th:href="@{/getBoard(id=${board.id})}"><span th:text="${board.id}"> </span></a></td>
+                <td><a th:href="@{/getBoard/{id}(id=${board.id})}"><span th:text="${board.id}"> </span></a></td>
                 <td th:text="${board.title}"></td>
                 <td th:text="${board.content}"></td>
                 <td th:text="${board.views}"></td>

@@ -27,11 +27,6 @@ public class BoardEntity extends BaseTimeEntity {
 
     @Builder
     public BoardEntity(Integer id, String title, String content, Integer views) {
-        System.out.println("--Entity Builder--");
-        //Assert.hasText(bankName, "bankName must not be empty");
-        //Assert.hasText(accountNumber, "accountNumber must not be empty");
-        //Assert.hasText(accountHolder, "accountHolder must not be empty");
-
         this.id = id;
         this.title = title;
         this.content = content;
