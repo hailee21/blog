@@ -3,10 +3,16 @@ package com.test.board.entity;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Getter @NoArgsConstructor
+@Setter
+@DynamicUpdate
+@DynamicInsert
 @Entity
 @Table(name = "boards")
 public class BoardEntity extends BaseTimeEntity {
@@ -22,7 +28,7 @@ public class BoardEntity extends BaseTimeEntity {
     @Column(name="content", nullable = false)
     private String content;
 
-    @Column(name="views", nullable = false, columnDefinition = "integer default 0")
+    @Column(name="views", nullable = true, columnDefinition = "integer default 0")
     private Integer views;
 
     @Builder

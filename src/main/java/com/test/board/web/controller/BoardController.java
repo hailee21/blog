@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @Controller
+@RequestMapping("boards")
 public class BoardController {
 
     private final BoardService boardService;
@@ -18,26 +19,42 @@ public class BoardController {
         this.boardService = boardService;
     }
 
-    @GetMapping("/board")
-    public String getBoardlist(Model model) {
-        List<BoardEntity> boardList = boardService.getBoardlist();
+    @GetMapping("")
+    public String getBoardList(Model model) {
+        List<BoardEntity> boardList = boardService.getBoardList();
         model.addAttribute("boardList", boardList);
-
         return "board/board_main";
     }
 
-    @GetMapping("/getBoard/{boardId}")
-    public String getBoard(@PathVariable("boardId") Integer boardId, Model model) {
-        BoardEntity board = boardService.getBoard(boardId);
-        model.addAttribute("board", board);
-
+    @GetMapping("/{boardId}")
+    public String getBoard(@PathVariable Integer boardId, Model model) {
+        model.addAttribute("board", boardService.getBoard(boardId));
         return "board/board_read";
     }
 
-    @DeleteMapping("/deleteBoard/{boardId}")
-    public String deleteBoard(@PathVariable("boardId") Integer boardId, Model model) {
-        boardService.deleteBoard(boardId);
-
-        return "redirect:/board";
+    @GetMapping("/create")
+    public String createBoard() {
+        return "board/board_add";
     }
+
+    @PostMapping("/create")
+    public String createBoard(@RequestBody BoardEntity boardEntity) {
+        Object board = boardService.createBoard(boardEntity);
+        return "redirect:/boards";
+    }
+
+    @PostMapping("/update/{boardId}")
+    public String updateBoard(@PathVariable Integer boardId, @RequestBody BoardEntity boardEntity) {
+        System.out.println(boardId);
+        BoardEntity board = boardService.updateBoard(boardId, boardEntity);
+        return "redirect:/boards";
+    }
+
+    @PostMapping("/delete/{boardId}")
+    public String deleteBoard(@PathVariable Integer boardId) {
+        System.out.println(boardId);
+        boardService.deleteBoard(boardId);
+        return "redirect:";
+    }
+
 }

@@ -3,6 +3,7 @@
 <head>
     <title>Board</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="#">
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
@@ -10,9 +11,9 @@
     <div>
         <form id="board_box">
             <p name="views" th:text="'조회 수: ' + ${board.views}" />
-            <input type="hidden" id="boardId" th:value="${board.id}">
-            <input type="text" name="boardTitle"  th:value="${board.title}"><br>
-            <input type="text" name="boadContent"  th:value="${board.content}">
+            <input type="hidden" id="id" th:value="${board.id}">
+            <input type="text" name="title" id="title" th:value="${board.title}"><br>
+            <input type="text" name="content" id="content" th:value="${board.content}">
         </form>
 
         <button id="updateBtn">수정</button>
@@ -21,21 +22,32 @@
 
     <script>
         $(document).ready(function() {
-            $("#delBtn").click(function() {
-                const href = "deleteBoard/" + $("#boardId").val();
-                console.log(href);
-
+            // 수정
+            $("#updateBtn").click(function() {
+                const boardEntity = {
+                    title: $("#title").val(),
+                    content: $("#content").val()
+                }
                 $.ajax({
-                    url: href,
-                    method: 'DELETE',
+                    url: "/boards/update/" + parseInt($("#id").val()),
+                    method: 'POST',
+                    data: JSON.stringify(boardEntity),
+                    contentType: 'application/json',
                     success: function(data) {
-                        window.location.href = '/board';
+                    }
+                })
+            });
+
+            // 삭
+            $("#delBtn").click(function() {
+                $.ajax({
+                    url: "/boards/delete/" + parseInt($("#id").val()),
+                    method: 'POST',
+                    success: function(data) {
                     }
                 })
             });
         })
-
-
     </script>
 </body>
 </html>

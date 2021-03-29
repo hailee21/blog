@@ -3,20 +3,30 @@
 <head>
     <title>Board</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="#">
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
 </head>
 <body>
     <div>
+        <input type="button" onclick="location.href='boards/create';" value="등록"/>
+        <br>
         <table>
             <tr>
                 <th>no.</th>
                 <th>제목</th>
                 <th>내용</th>
+                <th>조회 수</th>
+            </tr>
+            <tr id="boards">
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
             </tr>
             <tr th:each="board: ${boardList}">
-                <td><a th:href="@{/getBoard/{id}(id=${board.id})}"><span th:text="${board.id}"> </span></a></td>
-                <td th:text="${board.title}"></td>
+                <td th:text="${board.id}"></td>
+                <td><a th:href="@{/boards/{id}(id=${board.id})}"><span th:text="${board.title}"></span></a></td>
                 <td th:text="${board.content}"></td>
                 <td th:text="${board.views}"></td>
             </tr>

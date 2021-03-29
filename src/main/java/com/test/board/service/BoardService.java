@@ -5,6 +5,7 @@ import com.test.board.entity.CommentEntity;
 import com.test.board.repository.BoardRepository;
 import com.test.board.repository.CommentRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PathVariable;
 
 
 import java.util.ArrayList;
@@ -24,21 +25,26 @@ public class BoardService {
         this.commentRepository = commentRepository;
     }
 
-    public List<BoardEntity> getBoardlist() {
-        List<BoardEntity> boardList = boardRepository.findAll();
-
-        for(int i=0; i<boardList.size(); i++){
-            System.out.println(boardList.get(i).getId());
-            System.out.println(boardList.get(i).getTitle());
-        }
-
-        return boardList;
+    public List<BoardEntity> getBoardList() {
+        return boardRepository.findAll();
     }
 
     public BoardEntity getBoard(Integer boardId) {
-        Optional<BoardEntity> board = boardRepository.findById(boardId);
+        return boardRepository.findById(boardId).orElseThrow(NoSuchElementException::new);
+    }
 
-        return board.orElseThrow(() -> new NoSuchElementException());
+    public Object createBoard(BoardEntity boardEntity) {
+        return boardRepository.save(boardEntity);
+    }
+
+    public BoardEntity updateBoard(Integer boardId, BoardEntity boardEntity) {
+        // Jpa dirty checking 덕택에 update 하지 않아도 DB에 반영된다.
+        BoardEntity savedBoard = boardRepository.findById(boardId).orElseThrow(NoSuchElementException::new);
+
+        savedBoard.setTitle(boardEntity.getTitle());
+        savedBoard.setContent(boardEntity.getContent());
+        
+        return boardRepository.save(savedBoard);
     }
 
     public void deleteBoard(Integer boardId) {

@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>글 등</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="shortcut icon" href="#">
+
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <form id="board_box" action="/create-job" method="post">
+            <input type="text" name="title" id="title"> <br>
+            <input type="text" name="content" id="content"> <br>
+            <input type="button" value="등록" id="addBtn">
+        </form>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#addBtn").click(function() {
+                console.log("click");
+
+                const boardEntity = {
+                    title: $("#title").val(),
+                    content: $("#content").val()
+                }
+
+                $.ajax({
+                    url: "/boards/create",
+                    data: JSON.stringify(boardEntity),
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function(data) {
+                        window.location.href = '/';
+                    }
+                })
+            });
+        })
+
+
+    </script>
+</body>
+</html>
