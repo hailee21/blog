@@ -1,5 +1,6 @@
 package com.test.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,17 +16,18 @@ public class CommentEntity extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name="board_id")
-    private BoardEntity boardEntity;
+    //@JoinColumn(name="board_id")
+    private BoardEntity boardId;
 
     @Column(name="content", nullable = false)
     private String content;
 
     @Builder
-    public CommentEntity(Integer id, BoardEntity boardEntity, String content) {
+    public CommentEntity(Integer id, BoardEntity boardId, String content) {
         this.id = id;
-        this.boardEntity = boardEntity;
+        this.boardId = boardId;
         this.content = content;
     }
 }

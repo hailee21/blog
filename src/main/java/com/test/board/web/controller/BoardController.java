@@ -3,12 +3,14 @@ package com.test.board.web.controller;
 import com.test.board.entity.BoardEntity;
 import com.test.board.service.BoardService;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Slf4j
 @Controller
 @RequestMapping("boards")
 public class BoardController {

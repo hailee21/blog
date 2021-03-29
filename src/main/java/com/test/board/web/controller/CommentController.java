@@ -23,8 +23,8 @@ public class CommentController {
 
     @GetMapping("/comments/{boardId}")
     public String getCommentlist(@PathVariable("boardId") Integer boardId,  Model model) {
-        Optional<CommentEntity> commentList = Optional.ofNullable(commentService.getCommentlist(boardId));
-        model.addAttribute("commentList", commentList);
+        //Optional<CommentEntity> commentList = Optional.ofNullable(commentService.getCommentlist(boardId));
+        //model.addAttribute("commentList", commentList);
 
         return "board/comments";
     }

@@ -1,5 +1,6 @@
 package com.test.board.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -8,6 +9,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter @NoArgsConstructor
 @Setter
@@ -30,6 +32,10 @@ public class BoardEntity extends BaseTimeEntity {
 
     @Column(name="views", nullable = true, columnDefinition = "integer default 0")
     private Integer views;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "boards")
+    private List<CommentEntity> comments;
 
     @Builder
     public BoardEntity(Integer id, String title, String content, Integer views) {

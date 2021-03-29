@@ -19,10 +19,7 @@ public class CommentService {
         this.commentRepository = commentRepository;
     }
 
-    public CommentEntity getCommentlist(Integer boardId) {
-        Optional<CommentEntity> commentList = commentRepository.findById(boardId);
-
-        // 에러 발생
-        return commentList.orElseThrow(() -> new NoSuchElementException());
+    public List<CommentEntity> getCommentList(Integer boardId) {
+        return commentRepository.findAllById(boardId);
     }
 }
