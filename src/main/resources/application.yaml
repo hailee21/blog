@@ -2,6 +2,10 @@ server:
   port: 8080
 
 spring:
+  handlerbars:
+    suffix: .html
+  handlers:
+    cache: false
   mvc:
     view:
       suffix: .html

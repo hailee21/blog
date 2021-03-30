@@ -6,6 +6,7 @@
     <link rel="shortcut icon" href="#">
 
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script src="/js/board/board_add.js"></script>
 </head>
 <body>
     <div>
@@ -15,27 +16,5 @@
             <input type="button" value="등록" id="addBtn">
         </form>
     </div>
-
-    <script>
-        $(document).ready(function() {
-            $("#addBtn").on("click",function() {
-
-                const boardEntity = {
-                    title: $("#title").val(),
-                    content: $("#content").val()
-                }
-
-                $.ajax({
-                    url: "/boards/create",
-                    data: JSON.stringify(boardEntity),
-                    type: 'POST',
-                    contentType: 'application/json',
-                    success: function(data) {
-                        window.location.href = '/boards';
-                    }
-                })
-            });
-        })
-    </script>
 </body>
 </html>
