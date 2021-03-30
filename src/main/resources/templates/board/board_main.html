@@ -12,24 +12,24 @@
         <input type="button" onclick="location.href='/boards/create';" value="등록"/>
         <br>
         <table>
-            <tr>
-                <th>no.</th>
-                <th>제목</th>
-                <th>내용</th>
-                <th>조회 수</th>
-            </tr>
-            <tr id="boards">
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-            </tr>
-            <tr th:each="board: ${boardList}">
-                <td th:text="${board.id}"></td>
-                <td><a th:href="@{/boards/{id}(id=${board.id})}"><span th:text="${board.title}"></span></a></td>
-                <td th:text="${board.content}"></td>
-                <td th:text="${board.views}"></td>
-            </tr>
+            <thead>
+                <tr>
+                    <th>no.</th>
+                    <th>제목</th>
+                    <th>내용</th>
+                    <th>댓글 수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="board: ${boardList}">
+                    <td th:text="${board.id}"></td>
+                    <td><a th:href="@{/boards/{id}(id=${board.id})}"><span th:text="${board.title}"></span></a></td>
+                    <td th:text="${board.content}"></td>
+
+                    <td th:if="${not #lists.isEmpty(board.comments)}" th:text="${#lists.size(board.comments)}"></td>
+                    <td th:unless="${not #lists.isEmpty(board.comments)}" th:text="${#lists.size(board.comments)}"></td>
+                </tr>
+            </tbody>
         </table>
     </div>
 </body>
