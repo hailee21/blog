@@ -10,8 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface CommentRepository extends JpaRepository<CommentEntity, Integer> {
-    List<CommentEntity> findAllById(Integer boardId);
-
-    @Query("SELECT r FROM comments r WHERE r.board_id = ?1 ORDER BY r.rno ASC")
-    List<CommentEntity> getRepliesOfBoard(Integer boardId);
+    List<CommentEntity> findAllByBoardEntity_Id(Integer boardId);
 }

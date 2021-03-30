@@ -1,6 +1,7 @@
 package com.test.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -33,8 +34,8 @@ public class BoardEntity extends BaseTimeEntity {
     @Column(name="views", nullable = true, columnDefinition = "integer default 0")
     private Integer views;
 
-    @JsonIgnore
-    @OneToMany(mappedBy = "boards")
+    @JsonManagedReference
+    @OneToMany(mappedBy = "boardEntity")
     private List<CommentEntity> comments;
 
     @Builder

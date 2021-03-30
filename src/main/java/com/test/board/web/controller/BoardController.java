@@ -12,7 +12,7 @@ import java.util.List;
 
 @Slf4j
 @Controller
-@RequestMapping("boards")
+@RequestMapping("/boards")
 public class BoardController {
 
     private final BoardService boardService;

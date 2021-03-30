@@ -18,8 +18,7 @@
 
     <script>
         $(document).ready(function() {
-            $("#addBtn").click(function() {
-                console.log("click");
+            $("#addBtn").on("click",function() {
 
                 const boardEntity = {
                     title: $("#title").val(),
@@ -32,13 +31,11 @@
                     type: 'POST',
                     contentType: 'application/json',
                     success: function(data) {
-                        window.location.href = '/';
+                        window.location.href = '/boards';
                     }
                 })
             });
         })
-
-
     </script>
 </body>
 </html>

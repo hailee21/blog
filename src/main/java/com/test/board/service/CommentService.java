@@ -20,6 +20,19 @@ public class CommentService {
     }
 
     public List<CommentEntity> getCommentList(Integer boardId) {
-        return commentRepository.findAllById(boardId);
+        return commentRepository.findAllByBoardEntity_Id(boardId);
+    }
+
+    public Object createComment(CommentEntity commentEntity){
+        return commentRepository.save(commentEntity);
+    }
+
+    public CommentEntity getComment(Integer commentId){
+        return commentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+    }
+
+    public CommentEntity updateComment(Integer commentId, CommentEntity commentEntity) {
+//        CommentEntity savedComment = commentRepository.findById(commentId)
+        return null;
     }
 }

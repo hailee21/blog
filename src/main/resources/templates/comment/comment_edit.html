@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>comments</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+</head>
+<body>
+    <div>
+        <table>
+            <tr>
+                <th>no.</th>
+                <th>내용</th>
+            </tr>
+            <tr th:each="comment: ${comment}">
+                <td th:text="${comment.id}"></td>
+                <td><input type="text" name="content" id="content" th:value="${comment.content}"></td>
+                <td><input type="button" value="등록" id="editBtn"></td>
+            </tr>
+        </table>
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#editBtn").on("click",function() {
+                const boardId = {
+                    id: parseInt($("#id").val())
+                }
+                const commentEntity = {
+                    boardEntity: boardId,
+                    content: $("#comment_content").val()
+                }
+
+                $.ajax({
+                    url: "/api/v1/comments",
+                    method: 'POST',
+                    data: JSON.stringify(commentEntity),
+                    contentType: 'application/json',
+                    success: function(data) {
+                    }
+                })
+
+                $.ajax({
+                    url: "/boards/create",
+                    data: JSON.stringify(boardEntity),
+                    type: 'POST',
+                    contentType: 'application/json',
+                    success: function(data) {
+                        window.location.href = '/';
+                    }
+                })
+            });
+        })
+
+
+    </script>
+</body>
+</html>
