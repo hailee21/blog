@@ -26,7 +26,7 @@ public class BoardService {
     }
 
     public List<BoardEntity> getBoardList() {
-        return boardRepository.findAllByOrderByIdAsc();
+        return boardRepository.findAllById();
     }
 
     public BoardEntity getBoard(Integer boardId) {
@@ -48,6 +48,7 @@ public class BoardService {
     }
 
     public void deleteBoard(Integer boardId) {
+        //commentRepository.
         boardRepository.deleteById(boardId);
     }
 }

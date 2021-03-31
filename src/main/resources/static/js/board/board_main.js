@@ -1,5 +1,3 @@
 $(function(){
-    console.log("hello");
-    $("#header").load("/layouts/header.html");
-
+    $("#nav").load("/layouts/nav.html");
 });

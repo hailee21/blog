@@ -21,7 +21,7 @@ import java.util.List;
 public class BoardEntity extends BaseTimeEntity {
 
     @Id
-    @Column(name="board_id")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -31,7 +31,7 @@ public class BoardEntity extends BaseTimeEntity {
     @Column(name="content", nullable = false)
     private String content;
 
-    @Column(name="views", nullable = true, columnDefinition = "integer default 0")
+    @Column(name="views", columnDefinition = "integer default 0")
     private Integer views;
 
     @JsonManagedReference

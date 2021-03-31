@@ -1,5 +1,5 @@
 $(function(){
-    $("#header").load("/layouts/header.html");
+    $("#nav").load("/layouts/nav.html");
 
     $("#addBtn").on("click",function() {
         const boardEntity = {

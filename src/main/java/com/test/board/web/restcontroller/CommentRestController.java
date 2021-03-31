@@ -23,8 +23,8 @@ public class CommentRestController {
 
     @GetMapping("")
     public List<CommentEntity> getCommentList(@PathVariable Integer boardId) {
-        System.out.println(boardId);
-        return commentService.getCommentList(boardId); //"board/comments";
+        System.out.println(("commentRestController"));
+        return commentService.getCommentList(boardId);
     }
 
     @PostMapping("")
@@ -32,9 +32,19 @@ public class CommentRestController {
         return commentService.createComment(commentEntity);
     }
 
+    @GetMapping("/{commentId}")
+    public CommentEntity getComment(@PathVariable Integer commentId) {
+        return commentService.getComment(commentId);
+    }
+
     @PutMapping("/{commentId}")
     public CommentEntity updateComment(@PathVariable Integer commentId, @RequestBody CommentEntity commentEntity) {
         return commentService.updateComment(commentId, commentEntity);
+    }
+
+    @DeleteMapping("/{commentId}")
+    public void deleteComment(@PathVariable Integer commentId) {
+        commentService.deleteComment(commentId);
     }
 
 }

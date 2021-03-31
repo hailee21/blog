@@ -5,15 +5,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter @NoArgsConstructor
+@Getter @Setter
+@NoArgsConstructor
+@NamedEntityGraph(name="CommentEntity.boardEntity",
+    attributeNodes=@NamedAttributeNode("boardEntity"))
 @Entity
 @Table(name="comments")
 public class CommentEntity extends BaseTimeEntity {
     @Id
-    @Column(name="comment_id")
+    @Column(name="id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 

@@ -14,12 +14,12 @@ import java.time.LocalDateTime;
 @EntityListeners(AuditingEntityListener.class)
 public class BaseTimeEntity {
     @CreatedDate
-    @Column(name="created_at", length=45, nullable = false)
+    @Column(name="created_at", length=45, nullable = false, updatable = false)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @LastModifiedDate
-    @Column(name="updated_at", nullable = true)
+    @Column(name="updated_at", nullable = false)
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 }

@@ -30,6 +30,7 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public String getBoard(@PathVariable Integer boardId, Model model) {
+        System.out.println("boardController");
         model.addAttribute("board", boardService.getBoard(boardId));
         return "board/board_read";
     }
@@ -47,14 +48,12 @@ public class BoardController {
 
     @PostMapping("/update/{boardId}")
     public String updateBoard(@PathVariable Integer boardId, @RequestBody BoardEntity boardEntity) {
-        System.out.println(boardId);
         BoardEntity board = boardService.updateBoard(boardId, boardEntity);
-        return "redirect:/boards";
+        return "";
     }
 
     @PostMapping("/delete/{boardId}")
     public String deleteBoard(@PathVariable Integer boardId) {
-        System.out.println(boardId);
         boardService.deleteBoard(boardId);
         return "redirect:";
     }

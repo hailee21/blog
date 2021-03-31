@@ -6,21 +6,23 @@ function comments(){
             let table_data = "";
 
             for(const i in data){
-                table_data += "<tr>";
-                table_data += "  <td>"+data[i].content+"</td>";
-                table_data += "  <td>"+data[i].createdAt.slice(0,10)+"</td>";
-                table_data += "  <td><input type='button' class='updateCommentBtn' id='"+data[i].id+"' value='수정'></td>";
-                //table_data += "  <td><input type='button' onClick='updateComment("+data[i].id+")' value='수정'></td>";
-                table_data += "  <td><input type='button' onClick='deleteComment("+data[i].id+")' value='삭제'></td>";
-                table_data += "</tr>";
+                table_data += "<div>";
+                table_data += "  <div class='form-group'>";
+                table_data += "    <span class='col-sm-2 control-label'>"+data[i].content+"</span>";
+                table_data += "      <div class='col-sm-10'>"
+                table_data += "        <span class='col-sm-10' value='"+data[i].createdAt.slice(0,10)+"'></span>"
+                table_data += "        <button type='button' onClick='updateComment("+$("#id").val()+","+data[i].id+")' className='update_btn btn btn-warning'>수정</button>";
+                table_data += "        <button type='button' onClick='deleteComment("+$("#id").val()+","+data[i].id+")' className='delete_btn btn btn-danger'>삭제</button>";
+                table_data += "      </div>"
+                table_data += "  </div>";
+                table_data += "</div>";
             }
-            table_data += "<tr>";
-            table_data += "<td><input type='text' name='content' id='comment_content'></td>";
-            table_data += "<td><input type='button' onClick='addComment()' value='댓글 작성하기'></td>";
-            //table_data += "<td><button id='addCommentBtn'>댓글 작성하기</button></td>";
-            table_data += "</tr>";
+            table_data += "<div>";
+            table_data += "  <input type='text' name='content' class='col-sm-10' id='comment_content'>";
+            table_data += "  <button type='button' class='replyWriteBtn btn btn-success' onClick='addComment()'>댓글 작성하기</button>";
+            table_data += "</div>";
 
-            $("#comments_area").append(table_data);
+            $("#commentsArea").append(table_data);
         }
     })
 }
@@ -47,51 +49,50 @@ function addComment(){
 }
 
 // 댓글 수정
-// function updateComment(commentId){
-//     location.href="/boards/comments/"++"/get/"+commentId;
-// }
-
-// 댓글 삭제
-function deleteComment(commentId){
-
+function updateComment(boardId, commentId){
+    location.href="/boards/"+boardId+"/comments/"+commentId;
 }
 
+// 댓글 삭제
+function deleteComment(boardId, commentId){
+    $.ajax({
+        url: "/api/v1/boards/"+boardId+"/comments/"+commentId,
+        method: 'DELETE',
+        success: function(data) {
+            location.href="/boards";
+        }
+    })
+}
 
 $(function(){
-    $("#header").load("/layouts/header.html");
-
     comments();
 
-        // 게시물 수정
-        $("#updateBtn").on("click",function() {
-            const boardEntity = {
-                title: $("#title").val(),
-                content: $("#content").val()
+    // 게시물 수정
+    $("#updateBtn").on("click",function() {
+        const boardEntity = {
+            title: $("#title").val(),
+            content: $("#content").val()
+        }
+
+        $.ajax({
+            url: "/boards/update/" + parseInt($("#id").val()),
+            method: 'POST',
+            data: JSON.stringify(boardEntity),
+            contentType: 'application/json',
+            success: function(data) {
+                location.reload();
             }
+        })
+    });
 
-            $.ajax({
-                url: "/boards/update/" + parseInt($("#id").val()),
-                method: 'POST',
-                data: JSON.stringify(boardEntity),
-                contentType: 'application/json',
-                success: function(data) {
-                    location.reload();
-                }
-            })
-        });
-
-        // 게시물 삭제
-        $("#deleteBtn").on("click",function() {
-            $.ajax({
-                url: "/boards/delete/" + parseInt($("#id").val()),
-                method: 'POST',
-                success: function(data) {
-                }
-            })
-        });
-
-        // 댓글 수정
-        $(".updateCommentBtn").on("click",function(){
-           console.log("수정 클릭");
-        });
+    // 게시물 삭제
+    $("#deleteBtn").on("click",function() {
+        $.ajax({
+            url: "/api/v1/boards/" + parseInt($("#id").val()),
+            method: 'DELETE',
+            success: function(data) {
+                location.href="/boards";
+            }
+        })
+    });
 });

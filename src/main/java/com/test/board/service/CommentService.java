@@ -20,7 +20,7 @@ public class CommentService {
     }
 
     public List<CommentEntity> getCommentList(Integer boardId) {
-        return commentRepository.findAllByBoardEntity_Id(boardId);
+        return commentRepository.findByBoardEntityId(boardId);
     }
 
     public Object createComment(CommentEntity commentEntity){
@@ -32,7 +32,13 @@ public class CommentService {
     }
 
     public CommentEntity updateComment(Integer commentId, CommentEntity commentEntity) {
-//        CommentEntity savedComment = commentRepository.findById(commentId)
-        return null;
+        CommentEntity savedComment = commentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
+
+        savedComment.setContent(commentEntity.getContent());
+        return commentRepository.save(savedComment);
+    }
+
+    public void deleteComment(Integer commentId) {
+        commentRepository.deleteById(commentId);
     }
 }

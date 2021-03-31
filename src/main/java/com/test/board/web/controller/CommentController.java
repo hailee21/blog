@@ -28,7 +28,8 @@ public class CommentController {
 //    }
 
     @GetMapping("/{commentId}")
-    public String getComment(@PathVariable Integer boardId, @PathVariable Integer commentId, Model model) {
+    public String getComment(@PathVariable Integer commentId, Model model) {
+        System.out.println(("commentController"));
         model.addAttribute("comment", commentService.getComment(commentId));
         return "comment/comment_edit";
     }
