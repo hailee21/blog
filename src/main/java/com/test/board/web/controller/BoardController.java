@@ -23,8 +23,9 @@ public class BoardController {
 
     @GetMapping("")
     public String getBoardList(Model model) {
-        List<BoardEntity> boardList = boardService.getBoardList();
-        model.addAttribute("boardList", boardList);
+//        List<BoardEntity> boardList = boardService.getBoardList();
+//        model.addAttribute("boardList", boardList);
+        model.addAttribute("boardList", boardService.getBoardList());
         return "board/board_main";
     }
 
@@ -48,7 +49,7 @@ public class BoardController {
     @PostMapping("/update/{boardId}")
     public String updateBoard(@PathVariable Integer boardId, @RequestBody BoardEntity boardEntity) {
         BoardEntity board = boardService.updateBoard(boardId, boardEntity);
-        return "";
+        return "redirect:";
     }
 
     @PostMapping("/delete/{boardId}")
