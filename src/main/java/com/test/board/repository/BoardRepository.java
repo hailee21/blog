@@ -1,6 +1,7 @@
 package com.test.board.repository;
 
 import com.test.board.entity.BoardEntity;
+import com.test.board.entity.CommentEntity;
 import org.springframework.data.jpa.repository.EntityGraph;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,7 +15,8 @@ import java.util.Optional;
 public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
     //List<BoardEntity> findAllByOrderByIdAsc();
 
-    @EntityGraph(attributePaths = {"comments"})  // LAZY
-    List<BoardEntity> findAllById();
-    //List<BoardEntity> findAllByOrderByIdDesc();
+
+    //@Query("select b from BoardEntity b join fetch b.comments")
+    @EntityGraph(attributePaths = "comments")
+    List<BoardEntity> findAll();
 }

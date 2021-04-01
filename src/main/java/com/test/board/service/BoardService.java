@@ -26,7 +26,8 @@ public class BoardService {
     }
 
     public List<BoardEntity> getBoardList() {
-        return boardRepository.findAllById();
+        List<BoardEntity> bList = boardRepository.findAll();
+        return bList;
     }
 
     public BoardEntity getBoard(Integer boardId) {

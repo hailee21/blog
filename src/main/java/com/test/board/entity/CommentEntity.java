@@ -1,18 +1,19 @@
 package com.test.board.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
 @Getter @Setter
 @NoArgsConstructor
-@NamedEntityGraph(name="CommentEntity.boardEntity",
-    attributeNodes=@NamedAttributeNode("boardEntity"))
+@DynamicUpdate
+@DynamicInsert
 @Entity
 @Table(name="comments")
 public class CommentEntity extends BaseTimeEntity {
@@ -23,8 +24,8 @@ public class CommentEntity extends BaseTimeEntity {
 
     // 연관관계의 주인
     @JsonBackReference
-    @ManyToOne
-    @JoinColumn(name="board_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="board_id", foreignKey = @ForeignKey(name = "FK_COMMENT_BOARD"))
     private BoardEntity boardEntity;
 
     @Column(name="content", nullable = false)

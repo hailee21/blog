@@ -8,12 +8,17 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter @NoArgsConstructor
 @Setter
+@NamedEntityGraph(name="BoardEntity.comments",
+    attributeNodes = @NamedAttributeNode("comments"))
 @DynamicUpdate
 @DynamicInsert
 @Entity
@@ -35,8 +40,8 @@ public class BoardEntity extends BaseTimeEntity {
     private Integer views;
 
     @JsonManagedReference
-    @OneToMany(mappedBy = "boardEntity")
-    private List<CommentEntity> comments;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "boardEntity", cascade = CascadeType.ALL)
+    private List<CommentEntity> comments = new ArrayList<>();
 
     @Builder
     public BoardEntity(Integer id, String title, String content, Integer views) {

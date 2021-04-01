@@ -30,7 +30,6 @@ public class BoardRestController {
 
     @GetMapping("/{boardId}")
     public BoardEntity getBoard(@PathVariable Integer boardId) {
-        System.out.println("boardRestController");
         return boardService.getBoard(boardId);
     }
 

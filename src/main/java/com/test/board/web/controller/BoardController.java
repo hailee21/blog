@@ -30,7 +30,6 @@ public class BoardController {
 
     @GetMapping("/{boardId}")
     public String getBoard(@PathVariable Integer boardId, Model model) {
-        System.out.println("boardController");
         model.addAttribute("board", boardService.getBoard(boardId));
         return "board/board_read";
     }
