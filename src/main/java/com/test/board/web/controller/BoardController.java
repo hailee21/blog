@@ -48,7 +48,9 @@ public class BoardController {
 
     @PostMapping("/update/{boardId}")
     public String updateBoard(@PathVariable Integer boardId, @RequestBody BoardEntity boardEntity) {
+        System.out.println("여기 c1");
         BoardEntity board = boardService.updateBoard(boardId, boardEntity);
+        System.out.println("여기 c2");
         return "redirect:";
     }
 

@@ -73,6 +73,7 @@ $(function(){
             title: $("#title").val(),
             content: $("#content").val()
         }
+        //const url = "/boards/update/" + parseInt($("#id").val());
 
         $.ajax({
             url: "/boards/update/" + parseInt($("#id").val()),
@@ -88,7 +89,7 @@ $(function(){
     // 게시물 삭제
     $("#deleteBtn").on("click",function() {
         $.ajax({
-            url: "/api/v1/boards/" + parseInt($("#id").val()),
+            url: "/api/v1/boards/" + $("#id").val(),
             method: 'DELETE',
             success: function(data) {
                 location.href="/boards";

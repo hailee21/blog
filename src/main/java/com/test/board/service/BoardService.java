@@ -40,11 +40,12 @@ public class BoardService {
 
     public BoardEntity updateBoard(Integer boardId, BoardEntity boardEntity) {
         // Jpa dirty checking 덕택에 update 하지 않아도 DB에 반영된다.
+        System.out.println("여기 s1");
         BoardEntity savedBoard = boardRepository.findById(boardId).orElseThrow(NoSuchElementException::new);
-
+        System.out.println("여기 s2");
         savedBoard.setTitle(boardEntity.getTitle());
         savedBoard.setContent(boardEntity.getContent());
-        
+        System.out.println("여기 s3");
         return boardRepository.save(savedBoard);
     }
 
