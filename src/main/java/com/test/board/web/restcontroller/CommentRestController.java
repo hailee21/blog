@@ -23,7 +23,6 @@ public class CommentRestController {
 
     @GetMapping("")
     public List<CommentEntity> getCommentList(@PathVariable Integer boardId) {
-        System.out.println(("commentRestController"));
         return commentService.getCommentList(boardId);
     }
 

@@ -19,4 +19,6 @@ public interface BoardRepository extends JpaRepository<BoardEntity, Integer> {
     //@Query("select b from BoardEntity b join fetch b.comments")
     @EntityGraph(attributePaths = "comments")
     List<BoardEntity> findAll();
+
+    List<BoardEntity> findAllByOrderByIdDesc();
 }

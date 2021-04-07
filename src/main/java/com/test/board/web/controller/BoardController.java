@@ -42,22 +42,19 @@ public class BoardController {
 
     @PostMapping("/create")
     public String createBoard(@RequestBody BoardEntity boardEntity) {
-        Object board = boardService.createBoard(boardEntity);
+        boardService.createBoard(boardEntity);
         return "redirect:/boards";
     }
 
     @PostMapping("/update/{boardId}")
     public String updateBoard(@PathVariable Integer boardId, @RequestBody BoardEntity boardEntity) {
-        System.out.println("여기 c1");
-        BoardEntity board = boardService.updateBoard(boardId, boardEntity);
-        System.out.println("여기 c2");
-        return "redirect:";
+        boardService.updateBoard(boardId, boardEntity);
+        return "redirect:/boards";
     }
 
     @PostMapping("/delete/{boardId}")
     public String deleteBoard(@PathVariable Integer boardId) {
         boardService.deleteBoard(boardId);
-        return "redirect:";
+        return "redirect:/boards";
     }
-
 }
