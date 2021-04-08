@@ -26,7 +26,9 @@ public class BoardService {
     }
 
     public List<BoardEntity> getBoardList() {
-        return boardRepository.findAll();
+        //List<BoardEntity> bList = boardRepository.findAll();
+        List<BoardEntity> bList = boardRepository.findAllByOrderByIdDesc();
+        return bList;
     }
 
     public BoardEntity getBoard(Integer boardId) {
@@ -40,15 +42,12 @@ public class BoardService {
     public BoardEntity updateBoard(Integer boardId, BoardEntity boardEntity) {
         // Jpa dirty checking 덕택에 update 하지 않아도 DB에 반영된다.
         BoardEntity savedBoard = boardRepository.findById(boardId).orElseThrow(NoSuchElementException::new);
-
         savedBoard.setTitle(boardEntity.getTitle());
         savedBoard.setContent(boardEntity.getContent());
-        
         return boardRepository.save(savedBoard);
     }
 
     public void deleteBoard(Integer boardId) {
-        //commentRepository.
         boardRepository.deleteById(boardId);
     }
 }

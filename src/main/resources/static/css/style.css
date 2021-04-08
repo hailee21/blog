@@ -75,3 +75,7 @@ textarea:focus, input:focus{
     padding-top: 60px;
 }
 /*****************************************************************/
+
+.fa-arrows-alt-v:hover {
+    cursor: pointer;
+}

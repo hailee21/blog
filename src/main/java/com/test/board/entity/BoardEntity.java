@@ -43,7 +43,7 @@ public class BoardEntity extends BaseTimeEntity {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "boardEntity", cascade = CascadeType.ALL)
     private List<CommentEntity> comments = new ArrayList<>();
 
-    @Builder
+    @Builder // set 메서드를 방지하기 위한 것!
     public BoardEntity(Integer id, String title, String content, Integer views) {
         this.id = id;
         this.title = title;

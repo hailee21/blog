@@ -1,6 +1,7 @@
 function comments(){
     $.ajax({
         url: "/api/v1/boards/"+$("#id").val()+"/comments",
+        //url: "/boards/"+$("#id").val()+"/comments",
         method: 'GET',
         success: function(data){
             let table_data = "";
@@ -38,7 +39,8 @@ function addComment(){
     }
 
     $.ajax({
-        url: "/api/v1/boards/"+$("#id").val()+"/comments",
+        //url: "/api/v1/boards/"+$("#id").val()+"/comments",
+        url: "/boards/"+$("#id").val()+"/comments",
         method: 'POST',
         data: JSON.stringify(commentEntity),
         contentType: 'application/json',
@@ -56,7 +58,8 @@ function updateComment(boardId, commentId){
 // 댓글 삭제
 function deleteComment(boardId, commentId){
     $.ajax({
-        url: "/api/v1/boards/"+boardId+"/comments/"+commentId,
+        //url: "/api/v1/boards/"+boardId+"/comments/"+commentId,
+        url: "/boards/"+boardId+"/comments/"+commentId,
         method: 'DELETE',
         success: function(data) {
             location.href="/boards";
@@ -73,6 +76,7 @@ $(function(){
             title: $("#title").val(),
             content: $("#content").val()
         }
+        //const url = "/boards/update/" + parseInt($("#id").val());
 
         $.ajax({
             url: "/boards/update/" + parseInt($("#id").val()),
@@ -88,7 +92,7 @@ $(function(){
     // 게시물 삭제
     $("#deleteBtn").on("click",function() {
         $.ajax({
-            url: "/api/v1/boards/" + parseInt($("#id").val()),
+            url: "/api/v1/boards/" + $("#id").val(),
             method: 'DELETE',
             success: function(data) {
                 location.href="/boards";
