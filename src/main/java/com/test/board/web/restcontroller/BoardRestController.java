@@ -23,8 +23,18 @@ public class BoardRestController {
         return boardService.getBoardList();
     }
 
+    @GetMapping("/search/{searchValue}")
+    public List<BoardEntity> searchBoard(@PathVariable String searchValue) {
+        return boardService.searchBoard(searchValue);
+    }
+
+    @GetMapping("/sort/{sortId}")
+    public List<BoardEntity> getBoardListBySortId(@PathVariable Integer sortId) {
+        return boardService.getBoardListBySortId(sortId);
+    }
+
     @PostMapping("")
-    public Object createBoard(@RequestBody BoardEntity boardEntity){
+    public Object createBoard(@RequestBody BoardEntity boardEntity) {
         return boardService.createBoard(boardEntity);
     }
 

@@ -1,18 +1,14 @@
 package com.test.board.service;
 
 import com.test.board.entity.BoardEntity;
-import com.test.board.entity.CommentEntity;
 import com.test.board.repository.BoardRepository;
 import com.test.board.repository.CommentRepository;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class BoardService {
@@ -26,8 +22,25 @@ public class BoardService {
     }
 
     public List<BoardEntity> getBoardList() {
-        //List<BoardEntity> bList = boardRepository.findAll();
         List<BoardEntity> bList = boardRepository.findAllByOrderByIdDesc();
+        return bList;
+    }
+
+    public List<BoardEntity> searchBoard(String searchValue) {
+        List<BoardEntity> bList = boardRepository.findBySearchValue(searchValue); //(Sort.by(Sort.Direction.ASC, "searchValue"));
+        return bList;
+    }
+
+    public List<BoardEntity> getBoardListBySortId(Integer sortId) {
+        List<BoardEntity> bList = new ArrayList<>();
+        if (sortId == 0) {
+            bList = boardRepository.findAllByOrderByIdDesc();
+        } else if(sortId == 1) {
+            bList = boardRepository.findByOrderByTitle();
+        } else {
+            //bList = boardRepository.findByCommentCountOrderByDesc();  // 댓글 수에 의한 정렬
+        }
+
         return bList;
     }
 
