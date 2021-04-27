@@ -10,7 +10,8 @@ import org.hibernate.annotations.DynamicUpdate;
 
 import javax.persistence.*;
 
-@Getter @Setter
+@Getter
+@Setter
 @NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
@@ -38,11 +39,11 @@ public class CommentEntity extends BaseTimeEntity {
         this.content = content;
     }
 
-    public void setBoard(BoardEntity boardEntity){
+    public void setBoard(BoardEntity boardEntity) {
         this.boardEntity = boardEntity;
 
         // 무한루프에 빠지지 않도록 체크
-        if(!boardEntity.getComments().contains(this)){
+        if (!boardEntity.getComments().contains(this)) {
             boardEntity.getComments().add(this);
         }
     }

@@ -20,11 +20,11 @@ public class CommentService {
         return commentRepository.findByBoardEntityId(boardId);
     }
 
-    public Object createComment(CommentEntity commentEntity){
+    public Object createComment(CommentEntity commentEntity) {
         return commentRepository.save(commentEntity);
     }
 
-    public CommentEntity getComment(Integer commentId){
+    public CommentEntity getComment(Integer commentId) {
         return commentRepository.findById(commentId).orElseThrow(NoSuchElementException::new);
     }
 

@@ -12,10 +12,11 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Getter @NoArgsConstructor
-@Setter
 @NamedEntityGraph(name="BoardEntity.comments",
-    attributeNodes = @NamedAttributeNode("comments"))
+        attributeNodes = @NamedAttributeNode("comments"))
+@Getter
+@Setter
+@NoArgsConstructor
 @DynamicUpdate
 @DynamicInsert
 @Entity
